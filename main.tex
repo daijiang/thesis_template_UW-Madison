@@ -1,0 +1,72 @@
+% Preview source code
+
+%% LyX 2.1.4 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,oneside,english,american,oldfontcommands]{memoir}
+
+\input{preambles/preamble.tex}
+\input{preambles/thesisdefs.tex}
+
+\begin{document}
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .png}
+
+%===============================================================================
+% My info
+\clearpage\pagenumbering{roman}
+% This makes the page numbers Roman (i, ii, etc)
+
+\title{Your dissertation title here}
+\author{Your name}
+\department{Botany}
+\oralexamdate{03/08/2016}
+\committeeone{advisor, Professor, Botany}
+\committeetwo{committee, Associate Professor, Zoology}
+\committeethree{committee, Professor, Botany}
+\committeefour{committee, Professor, Zoology}
+\committeefive{committee, Professor, Botany}
+\date{2016}
+
+\maketitle % title page
+
+\newpage
+
+\iraggedright % align left
+
+\frontmatter
+
+\null\vfil
+\begin{center} % dedication
+\emph{For ...}
+\end{center}
+\par\vfil
+\newpage
+
+\chapterstyle{deposit}
+\pagestyle{deposit}
+
+\input{frontmatter/acks.tex} % acks
+
+\renewcommand{\contentsname}{Table of contents} % toc
+%\renewcommand{\cftchapterfont}{\tiny}
+%\renewcommand{\cftchapterfont}{\small\normalfont\sffamily}
+\maxtocdepth{chapter} %% depth of TOC
+% \maxtocdepth{section} %% depth of TOC
+\tableofcontents
+\clearpage
+
+% \linenumbers
+
+\input{frontmatter/abstract.tex} % abstract
+
+\clearpage
+
+\pagenumbering{arabic}
+
+\mainmatter
+
+\include{frontmatter/intro}
+\include{chapter1/chapter1}
+\include{chapter2/chapter2}
+
+\end{document}

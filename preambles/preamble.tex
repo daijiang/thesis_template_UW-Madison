@@ -1,0 +1,239 @@
+%%% packages used
+\usepackage{mathptmx}
+% \usepackage{mathpazo} % palatino
+\renewcommand{\familydefault}{\rmdefault}
+% \usepackage[latin9]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{tmargin=2.54cm,bmargin=2.54cm,lmargin=2.54cm,rmargin=2.54cm} %verbose,
+\setcounter{secnumdepth}{2}
+\usepackage{color}
+\usepackage{babel}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage[authoryear]{natbib}
+\usepackage{chapterbib} % to have separate bib for each chapter
+% This prevents entries breaking over pages, which leads to a ragged
+% bottom.  Not sure which is better/worse.
+% \AtBeginEnvironment{thebibliography}{\interlinepenalty=10000}
+\AtBeginDocument{\renewcommand{\bibname}{References}}
+
+% \usepackage{lineno} % [pagewise]
+
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=false,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 0},backref=false,colorlinks=false,
+ citecolor=black,pdfstartview=FitH]{hyperref}
+
+%% the spacing in memoir is weird, you'll need to use this
+\DisemulatePackage{setspace}
+\usepackage[doublespacing]{setspace}
+
+%% You want microtype.
+\IfFileExists{microtype.sty}{%
+\usepackage[protrusion=true,expansion=true]{microtype}%
+}{}
+
+%\pagestyle{thesisdraft}
+
+% Surround parts of graphics with box
+\usepackage{boxedminipage}
+
+% %% Avoid ugly "Type 3" fonts
+% \usepackage{lmodern}
+% \usepackage[T1]{fontenc}
+% \usepackage[LY1]{fontenc}
+
+%% want index??
+\usepackage{makeidx}
+\makeindex
+
+% \usepackage{tocloft}
+% \usepackage{ragged2e}
+
+\usepackage{chngcntr}
+
+\usepackage{ifpdf}
+\usepackage{alltt} % used in knirt output
+
+%%%%%%%%%%%%%%%% To define styles %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% NB: the ``deposit'' chapter- and page- styles should conform to UW
+%%% requirements.  If you are producing a pretty version of your
+%%% dissertation for web use later, you will certainly want to make
+%%% your own chapter and page styles.
+
+% \makechapterstyle{deposit}{%
+%   \renewcommand{\chapterheadstart}{}
+%   % Define a font-switching command
+% \newcommand{\tocfont}{\normalfont\textsf}
+
+% % Apply the font command to the section titles
+% \renewcommand{\cftchapterfont}{\normalfont\sffamily}
+% \renewcommand{\cftsectionfont}{\tocfont}
+% \renewcommand{\cftfigurefont}{\tocfont}
+% \renewcommand{\cfttablefont}{\tocfont}
+
+% % Apply it to the page numbers
+% \renewcommand{\cftchapterpagefont}{\tocfont}
+% \renewcommand{\cftsectionpagefont}{\tocfont}
+% \renewcommand{\cftfigurepagefont}{\tocfont}
+% \renewcommand{\cfttablepagefont}{\tocfont}
+%   % \renewcommand{\printchaptername}{}
+%   % \renewcommand{\chapternamenum}{}
+%   % \renewcommand{\printchapternum}{\parbox{2em}{\MakeLowercase{\Large\scshape\thechapter{}}} }
+%   % \renewcommand{\afterchapternum}{}
+%   \renewcommand{\printchaptertitle}[1]{%
+%   \raggedright\Large\scshape{##1}} %\MakeLowercase{##1}
+%   \renewcommand{\afterchaptertitle}{%
+%   \vskip\onelineskip %\hrule\vskip\onelineskip
+%   }
+% }
+
+%% remove bib from toc
+% \nobibintoc
+
+% \usepackage[sectionbib]{chapterbib}
+\renewcommand{\bibsection}{%
+	\section*{\bibname}
+	\bibmark
+	\ifnobibintoc\else
+	\phantomsection
+	\addcontentsline{toc}{section}{\bibname}
+	\fi
+	\prebibhook
+}
+
+\nobibintoc % do you want bib in toc?
+
+\makechapterstyle{deposit}{%
+  \renewcommand{\chapterheadstart}{}
+  \renewcommand{\printchaptername}{}
+  \renewcommand{\chapternamenum}{}
+  \renewcommand{\printchapternum}{\parbox{2em}{\MakeLowercase{\Large\scshape\thechapter{}}} }
+  \renewcommand{\afterchapternum}{}
+  \renewcommand{\printchaptertitle}[1]{%
+  % \raggedright\Large\scshape\MakeLowercase{##1}}
+  \raggedright\Large\textbf{##1}}
+  \renewcommand{\afterchaptertitle}{%
+  \vskip\onelineskip %\hrule
+  \vskip\onelineskip}
+}
+
+
+\makepagestyle{deposit}
+
+\makeatletter
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+\makeevenfoot{deposit}{}{}{}
+\makeoddfoot{deposit}{}{}{}
+\makeevenhead{deposit}{\thepage}{}{}
+\makeoddhead{deposit}{}{}{\thepage}
+\makeatother
+
+% %%% set up page numbering for chapter pages to satisfy UW requirements
+% %%% NB: You will want to delete until the ``SNIP'' mark if you are
+% %%% making a ``nice'' copy
+\copypagestyle{chapter}{plain}
+\makeoddfoot{chapter}{}{}{}
+\makeevenhead{chapter}{\thepage}{}{}
+\makeoddhead{chapter}{}{}{\thepage}
+%%% SNIP
+%%%%%%%%%%%%%%%% End define styles %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% flush left while keep identation
+\makeatletter
+\newcommand\iraggedright{%
+  \let\\\@centercr\@rightskip\@flushglue \rightskip\@rightskip
+  \leftskip\z@skip}
+\makeatother
+
+% number the equations
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+%%%%%%%%%%%%%%%%%% knitr settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{RGB}{248,248,248}
+% \definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end knitr setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands. %%%%%%%%%%%%%%%%%%
+\makeatletter
+\newcommand*{\LyXFourPerEmSpace}{\hskip0.25em\relax}
+\DeclareRobustCommand{\greektext}{%
+  \fontencoding{LGR}\selectfont\def\encodingdefault{LGR}}
+\DeclareRobustCommand{\textgreek}[1]{\leavevmode{\greektext #1}}
+\DeclareFontEncoding{LGR}{}{}
+\DeclareTextSymbol{\~}{LGR}{126}
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\newcommand{\lyxaddress}[1]{
+\par {\raggedright #1
+\vspace{1.4em}
+\noindent\par}
+}
+
+\usepackage{caption}
+\captionsetup{labelsep=period, labelfont=bf}
+
+\makeatother
+
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth
+%% (to make sure the graphics/tables do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end Lyx commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
